@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 // })->middleware('auth:sanctum');
 
 // Route::apiResource('todos', TodoController::class);
-Route::group(['prefix' => 'todo'], function () {
+Route::group(['prefix' => 'todo', 'middleware' => ['auth:api']], function () {
     Route::get('list', [TodoController::class, 'index']);
     Route::post('create', [TodoController::class, 'store']);
     Route::get('view/{todo}', [TodoController::class, 'show']);

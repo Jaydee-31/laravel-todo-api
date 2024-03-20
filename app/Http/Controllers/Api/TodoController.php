@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TodoRequest;
-use App\Http\Resources\TodoResource;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use App\Http\Requests\TodoRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\TodoResource;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -23,7 +24,12 @@ class TodoController extends Controller
      */
     public function store(TodoRequest $request)
     {
-        $todo = Todo::create($request->validated());
+        $todo = Todo::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'status' => $request['status'],
+            'user_id' => $request['user_id'],
+        ]);
         return new TodoResource($todo);
     }
 
