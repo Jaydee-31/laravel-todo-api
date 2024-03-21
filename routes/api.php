@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthenticationController;
 use App\Http\Controllers\Api\TodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,8 @@ use App\Http\Controllers\UserController;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+Route::post('login', [AuthenticationController::class, 'login']);
+Route::post('logout', [AuthenticationController::class, 'logout'])->middleware(['auth:api']);
 
 // Route::apiResource('todos', TodoController::class);
 Route::group(['prefix' => 'todo', 'middleware' => ['auth:api']], function () {
