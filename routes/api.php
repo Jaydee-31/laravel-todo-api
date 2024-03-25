@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthenticationController;
+use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\TodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,8 @@ Route::post('login', [AuthenticationController::class, 'login']);
 Route::post('signup', [AuthenticationController::class, 'signup']);
 Route::post('logout', [AuthenticationController::class, 'logout'])->middleware(['auth:api']);
 
-// Route::apiResource('todos', TodoController::class);
+Route::apiResource('survey', SurveyController::class)->middleware(['auth:api']);
+
 Route::group(['prefix' => 'todo', 'middleware' => ['auth:api']], function () {
     Route::get('list', [TodoController::class, 'index']);
     Route::post('create', [TodoController::class, 'store']);
