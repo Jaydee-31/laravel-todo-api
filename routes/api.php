@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 Route::post('login', [AuthenticationController::class, 'login']);
+Route::post('signup', [AuthenticationController::class, 'signup']);
 Route::post('logout', [AuthenticationController::class, 'logout'])->middleware(['auth:api']);
 
 // Route::apiResource('todos', TodoController::class);
