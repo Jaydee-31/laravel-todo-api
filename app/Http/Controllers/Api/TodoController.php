@@ -14,9 +14,15 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return TodoResource::collection(Todo::all());
+         $user = $request->user();
+
+         return TodoResource::collection(
+            Todo::where('user_id', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10)
+        );
     }
 
     /**
@@ -28,7 +34,7 @@ class TodoController extends Controller
             'name' => $request['name'],
             'description' => $request['description'],
             'status' => $request['status'],
-            'user_id' => $request['user_id'],
+            'user_id' => Auth::user()->id,
         ]);
         return new TodoResource($todo);
     }
