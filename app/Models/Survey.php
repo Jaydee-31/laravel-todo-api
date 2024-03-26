@@ -18,5 +18,11 @@ class Survey extends Model
         'user_id', 
         'status', 
         'created_at', 
-        'updated_at'];
+        'updated_at'
+    ];
+
+    public function questions()
+    {
+        return $this->hasMany(SurveyQuestion::class);
+    }
 }

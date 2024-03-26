@@ -23,9 +23,9 @@ class TodoRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'description' => ['nullable', 'string'],
+            'description' => ['required', 'string'],
             'status' => ['nullable', 'boolean'],
-            'user_id' => ['required', 'integer'],
+            'user_id' => 'exists:users,id',
         ];
     }
 }
