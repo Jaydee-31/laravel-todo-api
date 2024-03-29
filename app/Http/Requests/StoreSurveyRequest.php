@@ -33,7 +33,7 @@ class StoreSurveyRequest extends FormRequest
             'image' => 'nullable|string',
             'user_id' => 'exists:users,id',
             'status' => 'required|boolean',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'expire_date' => 'nullable|date|after:today',
             'questions' => 'array',
         ];

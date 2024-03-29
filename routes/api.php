@@ -19,7 +19,7 @@ Route::apiResource('survey', SurveyController::class)->middleware(['auth:api']);
 Route::group(['prefix' => 'todo', 'middleware' => ['auth:api']], function () {
     Route::get('list', [TodoController::class, 'index']);
     Route::post('create', [TodoController::class, 'store']);
-    Route::get('view/{todo}', [TodoController::class, 'show']);
+    Route::get('show/{todo}', [TodoController::class, 'show']);
     Route::match(['put', 'patch'], 'update/{todo}', [TodoController::class, 'update']);
     Route::delete('delete/{todo}', [TodoController::class, 'destroy']);
 });
