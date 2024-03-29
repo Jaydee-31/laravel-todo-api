@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\AuthenticationController;
-use App\Http\Controllers\Api\SurveyController;
-use App\Http\Controllers\Api\TodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\TodoController;
+use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Auth\PasswordController;
+use App\Http\Controllers\Api\Auth\AuthenticationController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -13,8 +15,11 @@ use App\Http\Controllers\UserController;
 Route::post('login', [AuthenticationController::class, 'login']);
 Route::post('signup', [AuthenticationController::class, 'signup']);
 Route::post('logout', [AuthenticationController::class, 'logout'])->middleware(['auth:api']);
+Route::get('me', [AuthenticationController::class, 'me'])->middleware(['auth:api']);
 
 Route::apiResource('survey', SurveyController::class)->middleware(['auth:api']);
+Route::apiResource('profile', ProfileController::class)->middleware(['auth:api']);
+Route::put('password', [PasswordController::class, 'update'])->middleware(['auth:api']);
 
 Route::group(['prefix' => 'todo', 'middleware' => ['auth:api']], function () {
     Route::get('list', [TodoController::class, 'index']);
