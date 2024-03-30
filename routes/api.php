@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\Auth\AuthenticationController;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
-Route::post('login', [AuthenticationController::class, 'login']);
+Route::post('login', [AuthenticationController::class, 'login'])->name('login');
 Route::post('signup', [AuthenticationController::class, 'signup']);
 Route::post('logout', [AuthenticationController::class, 'logout'])->middleware(['auth:api']);
 Route::get('me', [AuthenticationController::class, 'me'])->middleware(['auth:api']);
