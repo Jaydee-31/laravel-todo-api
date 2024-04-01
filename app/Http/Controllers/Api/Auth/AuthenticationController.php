@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 
 class AuthenticationController extends Controller
 {
@@ -67,7 +69,6 @@ class AuthenticationController extends Controller
 
     public function me(Request $request)
     {
-        return $request->user();
-      
+       return new UserResource($request->user());
     }
 }
