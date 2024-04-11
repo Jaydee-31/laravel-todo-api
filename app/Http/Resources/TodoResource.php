@@ -14,6 +14,15 @@ class TodoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'status' => $this->status,
+            'user_id' => $this->user_id,
+            'created_at' => $this->created_at->format('Y-m-d H:i A'),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i A'),
+            'user_name' => $this->user->name
+        ];
     }
 }
